@@ -26,8 +26,7 @@ module.exports = {
         secondary: "#333333",
       },
       backgroundImage: {
-        loginWaves: "url('../src/assets/img/login-waves.svg')",
-        loginWavess: "url('../src/assets/img/wave.svg')",
+        loginWaves: "url('../src/assets/img/wave.svg')",
       },
     },
   },
