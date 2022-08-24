@@ -10,6 +10,7 @@
     "test": "jest --watchAll"
   },
   "dependencies": {
+    "@mapbox/mapbox-sdk": "^0.13.4",
     "@reduxjs/toolkit": "^1.8.5",
     "axios": "^0.27.2",
     "env": "^0.0.2",
