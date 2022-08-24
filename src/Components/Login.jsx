@@ -2,58 +2,64 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import { BsFacebook } from "react-icons/bs";
+import { useFormik } from "formik";
+import * as Yup from "yup";
 import Button from "./Button";
 import ImageLogin from "./ImageLogin";
-import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import { getAuth, signInWithPopup, GoogleAuthProvider, signInWithEmailAndPassword } from "firebase/auth";
 import { google } from "../firebase/firebaseConfig";
+import { useDispatch } from "react-redux";
+import { doc, setDoc } from "firebase/firestore";
+import { db } from "../firebase/firebaseConfig";
+import { register } from "../Redux/features/loginSlice";
 
 const Login = () => {
+  const dispatch = useDispatch()
+
+
   const loginGoogle = () => {
     const auth = getAuth();
     signInWithPopup(auth, google)
-        .then((result) => {
+        .then(async(result) => {
             const credential = GoogleAuthProvider.credentialFromResult(result);
-            const token = credential.accessToken;
             // The signed-in user info.
-            const user = result.user;
-            console.log(user);
+            const {email, displayName, uid} = result.user;
+            const registro = {
+              email,
+              displayName,
+              uid
+            }
+            dispatch(register(registro))
+
+          await setDoc(doc(db, 'users', uid), registro)
     });
   };
 
-
   const formik = useFormik({
     initialValues: {
-      displayName: "",
       email: "",
       password: "",
-      validPassword: "",
     },
     validationSchema: Yup.object({
-      displayName: Yup.string()
-        .min(2, "Nombre muy corto")
-        .max(20, "Nombre muy Largo")
-        .required("Este nombre es requerido"),
       email: Yup.string()
         .email("debe ser del tipo ana@ana.com")
         .required("Este email se requiere"),
       password: Yup.string()
         .required("este campo es obligatorio")
-        .oneOf([Yup.ref("validPassword")], "Los Password No coinciden"),
-      validPassword: Yup.string()
-        .required("este campo es obligatorio")
-        .oneOf([Yup.ref("password")], "Los Password No coinciden"),
     }),
     onSubmit: (values) => {
         console.log(values);
         const auth = getAuth();
-        createUserWithEmailAndPassword(auth, values.email, values.password)
-        .then(async(userCredential) => {
+        signInWithEmailAndPassword(auth, values.email, values.password)
+        .then((userCredential) => {
             // Signed in
-            await updateProfile(auth.currentUser, {
-                displayName: values.displayName
-            })
-          const user = userCredential.user;
-          console.log(user);
+          const {email, displayName, uid} = userCredential.user;
+          const registro = {
+            email,
+            displayName,
+            uid
+          }
+          dispatch(register(registro))
         })
         .catch((error) => {
           const errorCode = error.code;
@@ -68,7 +74,7 @@ const Login = () => {
       <main className="w-full max-w-6xl h-[80vh] mx-auto flex flex-col justify-center items-center gap-7 lg:flex-row-reverse">
         <ImageLogin />
 
-        <form className=" w-full max-w-md flex flex-col gap-3 justify-around h-2/5 lg:w-1/2">
+        <form className=" w-full max-w-md flex flex-col gap-3 justify-around h-2/5 lg:w-1/2" onSubmit={formik.handleSubmit}>
           <div className=" flex flex-col gap-4 items-center lg:flex-row ">
             <div className="flex flex-col gap-1 items-center w-full ">
               <label
@@ -83,6 +89,8 @@ const Login = () => {
                 name="email"
                 placeholder="mail@mail.com"
                 className="border-transparent focus:border-transparent focus:ring-0 bg-transparent text-center focus:border-b-primary transition-all w-1/2 duration-500 focus:w-2/3 outline-none lg:w-full"
+                onChange={formik.handleChange}
+                value={formik.values.email}
               />
             </div>
 
@@ -99,6 +107,8 @@ const Login = () => {
                 name="password"
                 placeholder="****"
                 className="border-transparent focus:border-transparent focus:ring-0 bg-transparent text-center focus:border-b-primary transition-all w-1/2 duration-500 focus:w-2/3 outline-none lg:w-full"
+                onChange={formik.handleChange}
+                value={formik.values.password}
               />
             </div>
           </div>

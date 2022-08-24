@@ -4,12 +4,13 @@ import { Link } from "react-router-dom";
 import Button from "./Button";
 import ImageLogin from "./ImageLogin";
 import * as Yup from "yup";
-import { useDispatch, useSelector } from "react-redux";
-// import { register } from "../Redux/features/loginSlice";
+import { useDispatch} from "react-redux";
+import { register } from "../Redux/features/loginSlice";
 import { getAuth, createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { doc, setDoc } from "firebase/firestore";
+import { db } from "../firebase/firebaseConfig";
 
 const CreateAccount = () => {
-  const login = useSelector((state) => state.login);
   const dispatch = useDispatch();
 
   const formik = useFormik({
@@ -43,8 +44,16 @@ const CreateAccount = () => {
             await updateProfile(auth.currentUser, {
                 displayName: values.displayName
             })
-          const user = userCredential.user;
-          console.log(user);
+          const {email, displayName, uid} = userCredential.user;
+          const registro = {
+            email,
+            displayName,
+            uid
+          }
+          dispatch(register(registro))
+          await setDoc(doc(db, 'users', uid), registro)
+
+          console.log(registro);
         })
         .catch((error) => {
           const errorCode = error.code;
