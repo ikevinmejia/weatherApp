@@ -7,7 +7,7 @@ import * as Yup from "yup";
 import Button from "./Button";
 import ImageLogin from "./ImageLogin";
 import { getAuth, signInWithPopup, GoogleAuthProvider, signInWithEmailAndPassword } from "firebase/auth";
-import { google } from "../firebase/firebaseConfig";
+import { facebook, google } from "../firebase/firebaseConfig";
 import { useDispatch } from "react-redux";
 import { doc, setDoc } from "firebase/firestore";
 import { db } from "../firebase/firebaseConfig";
@@ -22,6 +22,23 @@ const Login = () => {
     signInWithPopup(auth, google)
         .then(async(result) => {
             const credential = GoogleAuthProvider.credentialFromResult(result);
+            // The signed-in user info.
+            const {email, displayName, uid} = result.user;
+            const registro = {
+              email,
+              displayName,
+              uid
+            }
+            dispatch(register(registro))
+
+          await setDoc(doc(db, 'users', uid), registro)
+    });
+  };
+  const loginFacebook = () => {
+    const auth = getAuth();
+    signInWithPopup(auth, facebook)
+        .then(async(result) => {
+            const credential = FacebookAuthProvider.credentialFromResult(result);
             // The signed-in user info.
             const {email, displayName, uid} = result.user;
             const registro = {
@@ -91,6 +108,7 @@ const Login = () => {
                 className="border-transparent focus:border-transparent focus:ring-0 bg-transparent text-center focus:border-b-primary transition-all w-1/2 duration-500 focus:w-2/3 outline-none lg:w-full"
                 onChange={formik.handleChange}
                 value={formik.values.email}
+                autoComplete='off'
               />
             </div>
 
@@ -109,6 +127,7 @@ const Login = () => {
                 className="border-transparent focus:border-transparent focus:ring-0 bg-transparent text-center focus:border-b-primary transition-all w-1/2 duration-500 focus:w-2/3 outline-none lg:w-full"
                 onChange={formik.handleChange}
                 value={formik.values.password}
+                autoComplete='off'
               />
             </div>
           </div>
@@ -121,7 +140,7 @@ const Login = () => {
             <button type="button" onClick={loginGoogle}>
               <FcGoogle size="30" />
             </button>
-            <button type="button">
+            <button type="button" onClick={loginFacebook} >
               <BsFacebook size="27" color="#0676E4" />
             </button>
           </div>

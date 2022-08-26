@@ -90,6 +90,7 @@ const CreateAccount = () => {
                   className="border-transparent focus:border-transparent focus:ring-0 bg-transparent text-center focus:border-b-primary transition-all w-1/2 duration-500 focus:w-2/3 outline-none lg:w-full"
                   onChange={formik.handleChange}
                   value={formik.values.displayName}
+                  autoComplete='off'
                   required
                 />
               </div>
@@ -108,6 +109,7 @@ const CreateAccount = () => {
                   className="border-transparent focus:border-transparent focus:ring-0 bg-transparent text-center focus:border-b-primary transition-all w-1/2 duration-500 focus:w-2/3 outline-none lg:w-full"
                   onChange={formik.handleChange}
                   value={formik.values.email}
+                  autoComplete='off'
                   required
                 />
               </div>
@@ -129,6 +131,7 @@ const CreateAccount = () => {
                   className="border-transparent focus:border-transparent focus:ring-0 bg-transparent text-center focus:border-b-primary transition-all w-1/2 duration-500 focus:w-2/3 outline-none lg:w-full"
                   onChange={formik.handleChange}
                   value={formik.values.password}
+                  autoComplete='off'
                   required
                 />
               </div>
@@ -147,6 +150,7 @@ const CreateAccount = () => {
                   className="border-transparent focus:border-transparent focus:ring-0 bg-transparent text-center focus:border-b-primary transition-all w-1/2 duration-500 focus:w-2/3 outline-none lg:w-full"
                   onChange={formik.handleChange}
                   value={formik.values.validPassword}
+                  autoComplete='off'
                   required
                 />
               </div>

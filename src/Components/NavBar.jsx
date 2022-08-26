@@ -1,8 +1,16 @@
 import React from 'react'
 import { Navbar, Button } from 'flowbite-react'
 import { NavLink } from 'react-router-dom'
+import { getAuth } from 'firebase/auth'
 
 const NavBar = () => {
+
+  const auth = getAuth();
+
+  const logOut = () => {
+    auth.signOut()
+  }
+
   return (
     <Navbar
   fluid={true}
@@ -19,7 +27,7 @@ const NavBar = () => {
     </span>
   </Navbar.Brand>
   <div className="flex md:order-2">
-    <Button color={'failure'} >
+    <Button color={'failure'} onClick={()=> logOut()} >
       LogOut
     </Button>
     <Navbar.Toggle />

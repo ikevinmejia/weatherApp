@@ -5,6 +5,12 @@ const getData = async(state, url) => {
     state(resp.data)
 }
 
+const getDataAxios = async(url) => {
+    const resp = await axios.get(url)
+    return resp.data
+}
+
 export {
     getData,
+    getDataAxios
 }
