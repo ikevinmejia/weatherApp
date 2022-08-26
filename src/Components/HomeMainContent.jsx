@@ -36,7 +36,7 @@ const HomeMainContent = ({ infoWeather }) => {
           </h3>
         </div>
       </div>
-      <h2 className="text-center text-xl font-normal">{description}</h2>
+      <h2 className="text-center text-2xl font-normal">{description}</h2>
     </section>
   );
 };

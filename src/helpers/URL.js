@@ -31,7 +31,7 @@ export {
 
 
 
-// https://api.openweathermap.org/data/2.5/weather?lat=33.44&lon=-94.04&appid=c163ec09e9af35c3d9e7bece43d1bd07
+// https://api.openweathermap.org/data/2.5/forecast?lat=33.44&lon=-94.04&appid=c163ec09e9af35c3d9e7bece43d1bd07
 
 
 // https://api.openweathermap.org/data/2.5/weather?lat=35&lon=139&appid=c163ec09e9af35c3d9e7bece43d1bd07

@@ -11,7 +11,8 @@ import Loading from './Loading'
 import * as Yup from "yup";
 import { useFormik } from "formik";
 import { searchWeather } from '../helpers/searchWeather'
-
+import Card from './Card'
+import ContainerSimpleCards from './ContainerSimpleCards'
 
 const Home = () => {
 
@@ -44,7 +45,8 @@ const Home = () => {
       search: Yup.string()
     }),
     onSubmit: ({search}) => {
-       searchWeather(setWeather, search)
+      searchWeather(setWeather, search)
+      localStorage.setItem('weather', JSON.stringify(weather))
       dispatch(infoWeather(weather))
     },
   });
@@ -59,17 +61,28 @@ const Home = () => {
       onChange={formik.handleChange}
       value={formik.values.search}
       />
+      <button type='submit'>
+
       <CgSearch color='#333333' size='30'/>
+      </button>
       </div>
     </form>
 
-    <div className='w-screen flex flex-col mt-7 gap-4 mx-auto'>
+    <div className='w-screen flex flex-col mt-7 gap-4 mx-auto bg-gradient-to-b from-zinc-200 to-mainBgColor'>
       {
         cargando
         ?  <Loading/> :
         <>
         <GeneralInformationSlider infoWeather={weather.list[0]} />
         <HomeMainContent infoWeather={weather.list[0]}/>
+      <ContainerSimpleCards >
+        <Card infoWeather={weather.list[1]} forecast='the next three hours'/>
+        <Card infoWeather={weather.list[8]} forecast='tomorrow'/>
+        <Card infoWeather={weather.list[16]} forecast='two days'/>
+        <Card infoWeather={weather.list[24]} forecast='three days'/>
+        <Card infoWeather={weather.list[32]} forecast='four days'/>
+        <Card infoWeather={weather.list[39]} forecast='five days'/>
+      </ContainerSimpleCards>
         </>
       }
     </div>
