@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Test in <Prueba/> match to snapshot 1`] = `
+<div>
+  <div>
+    <h1>
+      Contador
+    </h1>
+    <h2>
+      La cuenta va en
+    </h2>
+    <h3>
+      100
+    </h3>
+    <button>
+      Restar
+    </button>
+    <button>
+      Reset
+    </button>
+    <button>
+      Sumar
+    </button>
+  </div>
+</div>
+`;

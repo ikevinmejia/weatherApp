@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`test in <ImageLogin/> math to snapshot 1`] = `
+Object {
+  "container": <div>
+    <figure
+      class="w-full h-1/3 lg:w-1/2 lg:h-2/5"
+      data-testid="test-figure"
+    >
+      <img
+        alt=""
+        class="w-full h-full object-contain"
+        src="function SvgLogin(props) {
+  return React.createElement(
+    'svg', 
+    Object.assign({}, props, {'data-file-name': SvgLogin.name})
+  );
+}"
+      />
+    </figure>
+  </div>,
+}
+`;

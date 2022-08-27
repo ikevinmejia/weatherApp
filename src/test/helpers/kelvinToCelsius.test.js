@@ -1,11 +1,11 @@
 import { kelvinToCelsius } from "../../helpers/kelvinToCelsius"
 
-describe('Test in helpers', () => {
-    test('kelvinToCelsius debe retornar un tipo numero', () => {
+describe('Test in kelvintoCelsius', () => {
+    test('kelvinToCelsius debe retornar un tipo string', () => {
         const entrada = 280;
 
-        const salida = kelvinToCelsius(280);
+        const salida = kelvinToCelsius(entrada);
 
-        expect(salida).toBe(Number)
+        expect(salida).toEqual(expect.any(String))
     })
 })

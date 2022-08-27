@@ -20,8 +20,6 @@ const Profile = () => {
 
   const {onShow, show} = useContext(Contexto)
 
-
-
   const deleteAccount = () => {
     MySwal.fire({
       title: "Do you want to delete your account?",

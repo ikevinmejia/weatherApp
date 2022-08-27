@@ -16,7 +16,6 @@ import { register } from "../Redux/features/loginSlice";
 const Login = () => {
   const dispatch = useDispatch()
 
-
   const loginGoogle = () => {
     const auth = getAuth();
     signInWithPopup(auth, google)

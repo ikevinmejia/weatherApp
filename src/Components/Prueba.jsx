@@ -1,33 +1,30 @@
-import React, { useEffect, useState } from 'react'
-import { getData } from '../helpers/CRUD'
-import { getCoordsMapbox, getUrlWeather } from '../helpers/URL'
+import React, { useState } from 'react'
 
-const Prueba = () => {
+const Prueba = ({initialValue}) => {
 
-  const coords = {lat: "-74.08083", lon:"4.59889"}
-  const [prueba, setPrueba] = useState('')
-  const [coordenadas, setCoordenadas] = useState("")
+  const [counter, setCounter] = useState(initialValue);
 
-  useEffect(() => {
+  const sumar = () => {
+    setCounter(prev => prev + 1)
+  }
+  const restar = () => {
+    setCounter(prev => prev - 1)
+  }
 
-      getData(setPrueba,getCoordsMapbox("bogota"))
-      getData(setCoordenadas, getUrlWeather(coords))
-
-  }, [])
-
-  
-  console.log(prueba);
-  console.log(coordenadas);
-
-    https://api.openweathermap.org/data/3.0/onecall?lat=-74.08083&lon=4.59889&units=metric&lang=es&appid=42a661b3dda2f40d87ecdd10b6663a1f
-
+  const reset = () => {
+    setCounter(0)
+  }
 
   return (
     <div>
-        <form action="">
-            <input type="text" />
-            <button>Buscar</button>
-        </form>
+
+      <h1>Contador</h1>
+      <h2>La cuenta va en</h2>
+      <h3>{counter}</h3>
+      <button onClick={restar}>Restar</button>
+      <button onClick={reset}>Reset</button>
+      <button onClick={sumar}>Sumar</button>
+
     </div>
   )
 }
