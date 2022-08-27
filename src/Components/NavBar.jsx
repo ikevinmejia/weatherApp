@@ -32,15 +32,15 @@ const NavBar = () => {
     </Button>
     <Navbar.Toggle />
   </div>
-  <Navbar.Collapse>
+  <Navbar.Collapse >
     <NavLink
       to="/Home"
-      className={ ({isActive}) => (isActive ? 'text-primary' : '') }
+      className={ ({isActive}) => (isActive ? 'text-primary text-center' : 'text-center') }
     >
       Home
     </NavLink>
     <NavLink to="/Profile"
-    className={ ({isActive}) => (isActive ? 'text-primary' : '') }>
+    className={ ({isActive}) => (isActive ? 'text-primary text-center' : 'text-center') }>
       Profile
     </NavLink>
   </Navbar.Collapse>

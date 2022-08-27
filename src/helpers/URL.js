@@ -11,7 +11,6 @@ const getCoordsMapbox = async(city) => {
     const [lon, lat] = await features[0].center;
 
     const coords = {lon, lat}
-    console.log(coords);
     return coords
 }
 

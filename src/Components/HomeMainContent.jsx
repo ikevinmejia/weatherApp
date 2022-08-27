@@ -2,7 +2,7 @@ import React from "react";
 import { kelvinToCelsius } from "../helpers/kelvinToCelsius";
 import { getIconWeather } from "../helpers/URL";
 
-const HomeMainContent = ({ infoWeather }) => {
+const HomeMainContent = ({ infoWeather, city }) => {
   const {
     main: { temp, feels_like, temp_max, temp_min },
   } = infoWeather;
@@ -23,15 +23,16 @@ const HomeMainContent = ({ infoWeather }) => {
           </figure>
         </div>
         <div className="flex flex-col gap-3 text-center">
+          <h1 className="text-4xl font-light">{`${city}`}</h1>
           <h2 className="text-3xl">{`${kelvinToCelsius(temp)}° ${main}`}</h2>
           <h3 className="text-base">
             <span className="font-semibold text-secondary">
               Feels like:
             </span>{" "}
             {`${kelvinToCelsius(feels_like)}°`}{" "}
-            <span className="font-semibold text-secondary">Bajo:</span>{" "}
+            <span className="font-semibold text-secondary">Low:</span>{" "}
             {`${kelvinToCelsius(temp_min)}°`}{" "}
-            <span className="font-semibold text-secondary">Alto:</span>{" "}
+            <span className="font-semibold text-secondary">High:</span>{" "}
             {`${kelvinToCelsius(temp_max)}°`}{" "}
           </h3>
         </div>

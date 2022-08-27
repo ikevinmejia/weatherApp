@@ -4,6 +4,8 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import CreateAccount from "../Components/CreateAccount";
 import Home from "../Components/Home";
 import Login from "../Components/Login";
+import NavBar from "../Components/NavBar";
+import Profile from "../Components/Profile";
 import { ContextProvider } from "../context/ContextProvider";
 import { PrivateRouter } from "./PrivateRouter";
 import { PublicRouter } from "./PublicRouter";
@@ -28,7 +30,7 @@ const AppRoutes = () => {
     <ContextProvider>
 
       <Routes>
-        // Public Router
+        // Public Routes
         <Route
           path="/"
           element={
@@ -45,11 +47,24 @@ const AppRoutes = () => {
             </PublicRouter>
           }
         />
+
+        // Private Routes
+
         <Route
           path="/Home"
           element={
             <PrivateRouter isAutentication={auth}>
+              <NavBar />
               <Home />
+            </PrivateRouter>
+          }
+        />
+        <Route
+          path="/Profile"
+          element={
+            <PrivateRouter isAutentication={auth}>
+              <NavBar />
+              <Profile />
             </PrivateRouter>
           }
         />

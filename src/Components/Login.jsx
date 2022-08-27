@@ -23,28 +23,31 @@ const Login = () => {
         .then(async(result) => {
             const credential = GoogleAuthProvider.credentialFromResult(result);
             // The signed-in user info.
-            const {email, displayName, uid} = result.user;
+            const {email, displayName, uid, photoURL} = result.user;
             const registro = {
               email,
               displayName,
-              uid
+              uid,
+              photoURL
             }
             dispatch(register(registro))
 
           await setDoc(doc(db, 'users', uid), registro)
     });
   };
+
   const loginFacebook = () => {
     const auth = getAuth();
     signInWithPopup(auth, facebook)
         .then(async(result) => {
             const credential = FacebookAuthProvider.credentialFromResult(result);
             // The signed-in user info.
-            const {email, displayName, uid} = result.user;
+            const {email, displayName, uid, photoURL} = result.user;
             const registro = {
               email,
               displayName,
-              uid
+              uid,
+              photoURL
             }
             dispatch(register(registro))
 

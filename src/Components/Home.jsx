@@ -20,6 +20,8 @@ const Home = () => {
   const [cargando, setCargando] = useState(true)
   const dispatch = useDispatch()
 
+  const localStore = JSON.parse(localStorage.getItem('weather'))
+
   const initialState = {
     lon: "-74.08083",
     lat: "4.59889",
@@ -29,10 +31,20 @@ const Home = () => {
 
     const resolvePromise = async () => {
        await getData(setWeather, getUrlWeather(initialState))
-       setCargando(false)
-       if (weather) {
+       
+
+       if (localStore) {
+        setWeather(localStore)
+        console.log('local');
+        setCargando(false)
+       } else if (weather){
         dispatch(infoWeather(weather))
+        console.log('por defecto');
+        setCargando(false)
       }
+      //  if (weather) {
+      //   dispatch(infoWeather(weather))
+      // }
     }
     resolvePromise()
   },[cargando])
@@ -53,7 +65,6 @@ const Home = () => {
 
   return (
     <>
-    <NavBar />
     <form className='w-full max-w-xl flex justify-center items-center mx-auto mt-4' onSubmit={formik.handleSubmit}>
       <div className='border border-primary rounded-2xl hover:border-primary hover:ring-0 bg-transparent text-center  transition-all w-1/2 duration-500 hover:w-10/12 outline-none flex justify-around items-center'>
       <input type="search" name="search" id="search" className='border border-transparent focus:border-transparent focus:ring-0 bg-transparent text-start outline-none w-3/5'
@@ -74,7 +85,7 @@ const Home = () => {
         ?  <Loading/> :
         <>
         <GeneralInformationSlider infoWeather={weather.list[0]} />
-        <HomeMainContent infoWeather={weather.list[0]}/>
+        <HomeMainContent infoWeather={weather.list[0]} city={weather.city.name}/>
       <ContainerSimpleCards >
         <Card infoWeather={weather.list[1]} forecast='the next three hours'/>
         <Card infoWeather={weather.list[8]} forecast='tomorrow'/>

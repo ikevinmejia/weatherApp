@@ -17,10 +17,15 @@ export const loginSlice = createSlice({
         logout: (state, action) => {
             return state = null
           },
+
+        updateData: (state, action) => {
+            state.email = action.payload.email
+            state.displayName = action.payload.displayName
+        }
     }
 })
 
 
-export const {register, logout} = loginSlice.actions;
+export const {register, logout, updateData} = loginSlice.actions;
 
 export default loginSlice.reducer
