@@ -30,11 +30,11 @@ const Home = () => {
        await getData(setWeather, getUrlWeather(initialState))
        const localStore = JSON.parse(localStorage.getItem('weather'))
 
-       if (localStore) {
+       if (localStore != null) {
+        console.log(localStore + 'STOREEEEEEEEE');
         setWeather(localStore)
-        console.log('local');
         setCargando(false)
-       } else if (weather){
+       } else {
         dispatch(infoWeather(weather))
         console.log('por defecto');
         setCargando(false)
