@@ -2,7 +2,7 @@ import React from 'react'
 import { Navbar, Button } from 'flowbite-react'
 import { NavLink } from 'react-router-dom'
 import { getAuth } from 'firebase/auth'
-
+import logo from '../assets/img/Logo.png'
 const NavBar = () => {
 
   const auth = getAuth();
@@ -18,7 +18,7 @@ const NavBar = () => {
 >
   <Navbar.Brand href="/Home">
     <img
-      src="../src/assets/img/Logo.png"
+      src={logo}
       className="mr-3 h-6 sm:h-9"
       alt="Flowbite Logo"
     />

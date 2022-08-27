@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import NavBar from './NavBar'
 import {CgSearch} from 'react-icons/cg'
 import GeneralInformationSlider from './GeneralInformationSlider'
 import HomeMainContent from './HomeMainContent'
@@ -20,8 +19,6 @@ const Home = () => {
   const [cargando, setCargando] = useState(true)
   const dispatch = useDispatch()
 
-  const localStore = JSON.parse(localStorage.getItem('weather'))
-
   const initialState = {
     lon: "-74.08083",
     lat: "4.59889",
@@ -31,7 +28,7 @@ const Home = () => {
 
     const resolvePromise = async () => {
        await getData(setWeather, getUrlWeather(initialState))
-       
+       const localStore = JSON.parse(localStorage.getItem('weather'))
 
        if (localStore) {
         setWeather(localStore)
