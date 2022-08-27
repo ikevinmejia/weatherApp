@@ -10,12 +10,6 @@ Object {
       <img
         alt=""
         class="w-full h-full object-contain"
-        src="function SvgLogin(props) {
-  return React.createElement(
-    'svg', 
-    Object.assign({}, props, {'data-file-name': SvgLogin.name})
-  );
-}"
       />
     </figure>
   </div>,
