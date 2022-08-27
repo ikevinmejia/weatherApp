@@ -5,6 +5,7 @@ import { BsFacebook } from "react-icons/bs";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import Button from "./Button";
+import imgLogin from '../assets/img/login.svg'
 import ImageLogin from "./ImageLogin";
 import { getAuth, signInWithPopup, GoogleAuthProvider, signInWithEmailAndPassword } from "firebase/auth";
 import { facebook, google } from "../firebase/firebaseConfig";
@@ -91,7 +92,7 @@ const Login = () => {
   return (
     <div className="w-screen h-screen bg-loginWaves bg-bottom bg-no-repeat bg-mainBgColor bg-cover">
       <main className="w-full max-w-6xl h-[80vh] mx-auto flex flex-col justify-center items-center gap-7 lg:flex-row-reverse">
-        <ImageLogin />
+        <ImageLogin img={imgLogin} />
 
         <form className=" w-full max-w-md flex flex-col gap-3 justify-around h-2/5 lg:w-1/2" onSubmit={formik.handleSubmit}>
           <div className=" flex flex-col gap-4 items-center lg:flex-row ">

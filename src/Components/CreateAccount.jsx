@@ -9,6 +9,7 @@ import { register } from "../Redux/features/loginSlice";
 import { getAuth, createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { doc, setDoc } from "firebase/firestore";
 import { db } from "../firebase/firebaseConfig";
+import imgCreateAccount from '../assets/img/create_account.svg'
 
 const CreateAccount = () => {
   const dispatch = useDispatch();
@@ -67,7 +68,7 @@ const CreateAccount = () => {
   return (
     <div className="w-screen h-screen bg-loginWaves bg-bottom bg-no-repeat bg-mainBgColor bg-cover">
       <main className="w-full max-w-6xl h-[80vh] mx-auto flex flex-col justify-center items-center gap-7 lg:flex-row-reverse">
-        <ImageLogin />
+        <ImageLogin img={imgCreateAccount} />
 
         <form
           className=" w-full max-w-lg flex flex-col gap-3 justify-around h-2/5 "
